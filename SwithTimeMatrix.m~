@@ -1,0 +1,67 @@
+%% Code for analysis of tracks - Switch and Time Matrix
+%% ====================================================
+
+
+% Get thresholded tracks
+% ----------------------
+
+Track_Densities = log10(Track_Densities);
+Track_Densities(Track_Densities==-Inf)=0;
+Track_Densities(Track_Densities>=3.5)=6;
+Track_Densities(Track_Densities<=2.8 & Track_Densities~=0)=2;
+Track_Densities(Track_Densities<=3.5 & Track_Densities>=2.8) = 4;
+
+
+%% Step 1: Characterize the tracks
+%% -------------------------------
+
+% Does this track cycle? 
+% ----------------------
+
+% Non-cyclers = 0
+% Cyclers = 1
+
+% Calculate the amount of switches - if empty matrix = non-cycler, if not
+% empty = cyler
+
+% Isolate the track
+Track = nonzeros(Track_Densities(k,:))';
+% Get the switches
+Switches = diff(Track);
+% Define in which frame the switch happens
+Switches2 = find(Switches);
+
+% Calculate the amount of switches - if empty matrix = non-cycler, if not
+% empty = cyler
+
+if isempty(Switches2)
+   Cycling=0; 
+   Density_Class = Track(1);
+   Frame = 0;
+   Length
+else
+    Cycling=1;
+end
+
+
+% Details about the cycling/non-cycling?
+% --------------------------------------
+
+% Density class(es) = Loner, Packs or Swarms
+% When the switch happens = Frame
+% Length of path in specific density states
+% Which cycling happens at beginning of density state path - S_L, L_P,...
+% Which cycling happens at end of density state path - S_L, L_P,...
+
+
+%% Step 2: Save for each track the line in a matfile
+%% -------------------------------------------------
+
+%% Step 3: Construct the Switch Matrix
+%% -----------------------------------
+
+
+%% Step 4: Construct the Time Matrix
+%% ---------------------------------
+
+
